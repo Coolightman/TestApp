@@ -1,7 +1,7 @@
-package by.coolightman.testapp.data.local
+package by.coolightman.testapp.data.remote
 
-import by.coolightman.testapp.data.local.dto.PostDto
-import by.coolightman.testapp.data.local.dto.UserDto
+import by.coolightman.testapp.data.remote.dto.PostDto
+import by.coolightman.testapp.data.remote.dto.UserDto
 import retrofit2.Response
 import retrofit2.http.GET
 

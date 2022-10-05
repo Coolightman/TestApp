@@ -1,6 +1,6 @@
 package by.coolightman.testapp.di
 
-import by.coolightman.testapp.data.local.ApiService
+import by.coolightman.testapp.data.remote.ApiService
 import by.coolightman.testapp.util.API_URL
 import dagger.Module
 import dagger.Provides

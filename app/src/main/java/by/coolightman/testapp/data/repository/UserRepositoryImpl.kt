@@ -1,6 +1,6 @@
 package by.coolightman.testapp.data.repository
 
-import by.coolightman.testapp.data.local.ApiService
+import by.coolightman.testapp.data.remote.ApiService
 import by.coolightman.testapp.domain.model.User
 import by.coolightman.testapp.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
@@ -19,14 +19,18 @@ class UserRepositoryImpl @Inject constructor(
     private suspend fun fetchPosts() {
         val response = apiService.getPosts()
         if (response.isSuccessful){
+            response.body()?.let {
 
+            }
         }
     }
 
     private suspend fun fetchUsers() {
         val response = apiService.getUsers()
         if (response.isSuccessful){
+            response.body()?.let {
 
+            }
         }
     }
 

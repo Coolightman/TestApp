@@ -1,6 +1,6 @@
 package by.coolightman.testapp.data.repository
 
-import by.coolightman.testapp.data.local.ApiService
+import by.coolightman.testapp.data.remote.ApiService
 import by.coolightman.testapp.domain.model.Post
 import by.coolightman.testapp.domain.repository.PostRepository
 import kotlinx.coroutines.flow.Flow
