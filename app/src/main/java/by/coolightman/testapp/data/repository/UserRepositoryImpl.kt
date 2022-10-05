@@ -18,7 +18,7 @@ class UserRepositoryImpl @Inject constructor(
 
     private suspend fun fetchPosts() {
         val response = apiService.getPosts()
-        if (response.isSuccessful){
+        if (response.isSuccessful) {
             response.body()?.let {
 
             }
@@ -27,7 +27,7 @@ class UserRepositoryImpl @Inject constructor(
 
     private suspend fun fetchUsers() {
         val response = apiService.getUsers()
-        if (response.isSuccessful){
+        if (response.isSuccessful) {
             response.body()?.let {
 
             }
