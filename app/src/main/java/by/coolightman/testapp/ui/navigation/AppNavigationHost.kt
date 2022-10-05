@@ -15,7 +15,7 @@ import by.coolightman.testapp.util.ARG_USER_ID
 fun AppNavigationHost(
     navController: NavHostController
 ) {
-    NavHost(navController = navController, startDestination = NavRoutes.UsersList.route){
+    NavHost(navController = navController, startDestination = NavRoutes.UsersList.route) {
 
         composable(
             route = NavRoutes.UsersList.route,
@@ -33,9 +33,7 @@ fun AppNavigationHost(
                 }
             )
         ) {
-            UserScreen(
-                navController = navController
-            )
+            UserScreen()
         }
     }
 }
