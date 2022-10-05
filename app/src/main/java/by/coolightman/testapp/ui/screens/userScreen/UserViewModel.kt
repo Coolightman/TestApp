@@ -5,10 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import by.coolightman.testapp.domain.usecase.GetPostsByUserUseCase
 import by.coolightman.testapp.domain.usecase.GetUserUseCase
 import by.coolightman.testapp.util.ARG_USER_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,13 +33,23 @@ class UserViewModel @Inject constructor(
     }
 
     private fun getUser(userId: Long) {
-        uiState = uiState.copy(
-            userId = userId
-        )
+        viewModelScope.launch {
+            getUserUseCase(userId).collectLatest {
+                uiState = uiState.copy(
+                    imageUrl = it.imageUrl
+                )
+            }
+        }
     }
 
     private fun getPosts(userId: Long) {
-
+        viewModelScope.launch {
+            getPostsByUserUseCase(userId).collectLatest {
+                uiState = uiState.copy(
+                    posts = it
+                )
+            }
+        }
     }
 
 }

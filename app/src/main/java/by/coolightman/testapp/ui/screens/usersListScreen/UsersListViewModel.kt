@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.coolightman.testapp.domain.usecase.GetUsersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,7 +25,11 @@ class UsersListViewModel @Inject constructor(
 
     private fun getUsers() {
         viewModelScope.launch {
-
+            getUsersUseCase().collectLatest {
+                uiState = uiState.copy(
+                    list = it
+                )
+            }
         }
     }
 }
