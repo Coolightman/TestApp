@@ -4,9 +4,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import by.coolightman.testapp.domain.usecase.GetPostsCountByUserUseCase
 import by.coolightman.testapp.domain.usecase.GetUsersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,6 +25,8 @@ class UsersListViewModel @Inject constructor(
     }
 
     private fun getUsers() {
+        viewModelScope.launch {
 
+        }
     }
 }
