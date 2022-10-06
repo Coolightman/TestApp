@@ -1,19 +1,20 @@
 package by.coolightman.testapp.ui.screens.usersListScreen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import by.coolightman.testapp.ui.component.UserItem
 import by.coolightman.testapp.ui.model.NavRoutes
+import kotlinx.coroutines.delay
 
 @Composable
 fun UsersListScreen(
@@ -22,26 +23,45 @@ fun UsersListScreen(
 ) {
     val uiState = viewModel.uiState
     val listState = rememberLazyListState()
+    val scaffoldState = rememberScaffoldState()
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(
-            state = listState,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(12.dp),
-            modifier = Modifier.fillMaxSize()
+    LaunchedEffect(uiState.errorMessage) {
+        if (uiState.errorMessage.isNotEmpty()) {
+            scaffoldState.snackbarHostState.showSnackbar(
+                message = uiState.errorMessage
+            )
+            delay(4000)
+            viewModel.resetSnack()
+        }
+    }
+
+    Scaffold(
+        scaffoldState = scaffoldState
+    ) { padding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
         ) {
-            items(
-                items = uiState.list,
-                key = { it.id }
-            ) { user ->
-                UserItem(
-                    user = user,
-                    onClick = {
-                        navController.navigate(NavRoutes.User.withArgs(user.id.toString())){
-                            launchSingleTop = true
+            LazyColumn(
+                state = listState,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(12.dp),
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(
+                    items = uiState.list,
+                    key = { it.id }
+                ) { user ->
+                    UserItem(
+                        user = user,
+                        onClick = {
+                            navController.navigate(NavRoutes.User.withArgs(user.id.toString())) {
+                                launchSingleTop = true
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
     }

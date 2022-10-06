@@ -1,4 +1,4 @@
-package by.coolightman.testapp.data.remote
+package by.coolightman.testapp.data.remote.service
 
 import by.coolightman.testapp.data.remote.dto.PostDto
 import by.coolightman.testapp.data.remote.dto.UserDto

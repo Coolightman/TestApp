@@ -1,6 +1,6 @@
 package by.coolightman.testapp.di
 
-import by.coolightman.testapp.data.remote.ApiService
+import by.coolightman.testapp.data.remote.service.ApiService
 import by.coolightman.testapp.util.API_URL
 import dagger.Module
 import dagger.Provides
@@ -24,4 +24,6 @@ object ApiModule {
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+
+
 }
