@@ -8,7 +8,7 @@ import by.coolightman.testapp.data.local.dbModel.PostDb
 import by.coolightman.testapp.data.local.dbModel.UserDb
 
 @Database(
-    version = 2,
+    version = 3,
     entities = [
         UserDb::class,
         PostDb::class

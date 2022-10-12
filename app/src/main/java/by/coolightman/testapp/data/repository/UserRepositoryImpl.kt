@@ -17,7 +17,13 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
 
     override fun getUsers(): Flow<List<User>> =
-        userDao.getAll().map { it.map { userDb -> userDb.toUser() } }
+        userDao.getUsersWithPosts().map {
+            it.map { userWithPostsDb ->
+                userWithPostsDb.userDb.toUser().copy(
+                    postsCount = userWithPostsDb.postsDb.size
+                )
+            }
+        }
 
     override fun getUser(userId: Long): Flow<User> =
         userDao.getUser(userId).map { it.toUser() }
